@@ -1,0 +1,22 @@
+# Node.js dependencies
+node_modules/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables (DO NOT COMMIT `.env`!!!)
+.env
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Editor-specific files
+.vscode/
+.idea/
+
+# TypeScript leftovers (if any)
+dist/
+*.tsbuildinfo
