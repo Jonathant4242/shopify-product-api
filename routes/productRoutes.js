@@ -1,8 +1,7 @@
 const express = require("express");
+const router = express.Router();
 const Product = require("../schemas/productSchema");
 
-
-const router = express.Router();
 
 // GET all products from MongoDB
 router.get("/", async (req, res) => {
