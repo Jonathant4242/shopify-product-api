@@ -1,54 +1,52 @@
 const swaggerAutogen = require("swagger-autogen")();
 
 const doc = {
-  swagger: "2.0", // ✅ Ensure we're using OpenAPI 3.0.0
+  swagger: "2.0",
   info: {
     title: "Shopify Product API",
     version: "1.0.0",
     description: "API documentation for Shopify Product Management",
   },
-  servers: [
-    {
-      url: "http://localhost:5001",
-      description: "Local development server",
+  host: "localhost:5001",
+  basePath: "/api",  // ✅ Ensures all requests go to `/api`
+  schemes: ["http"],
+  consumes: ["application/json"],
+  produces: ["application/json"],
+
+  definitions: {
+    Product: {
+      type: "object",
+      properties: {
+        name: { type: "string", example: "Wireless Mouse" },
+        price: { type: "number", example: 29.99 },
+        category: { type: "string", example: "Electronics" },
+        description: { type: "string", example: "A high-quality wireless mouse." },
+        availability: { type: "boolean", example: true },
+      },
     },
-  ],
-  components: {
-    schemas: {
-      Product: {
-        type: "object",
-        properties: {
-          id: {
-            type: "string",
-            description: "Unique identifier for the product",
-            example: "65f123abc456d789ef012345",
+  },
+
+  paths: {
+    "/products": {  // ✅ Ensures `POST` goes to `/api/products`
+      post: {
+        summary: "Create a new product",
+        description: "Adds a product to the database.",
+        consumes: ["application/json"],
+        produces: ["application/json"],
+        parameters: [
+          {
+            in: "body",
+            name: "body",
+            required: true,
+            schema: {
+              $ref: "#/definitions/Product",
+            },
           },
-          name: {
-            type: "string",
-            description: "Product name",
-            example: "Wireless Mouse",
-          },
-          price: {
-            type: "number",
-            description: "Product price",
-            example: 29.99,
-          },
-          description: {
-            type: "string",
-            description: "Product details",
-            example: "A high-quality wireless mouse with ergonomic design.",
-          },
-          availability: {
-            type: "boolean",
-            description: "Indicates if the product is available",
-            example: true,
-          },
-          timestamp: {
-            type: "string",
-            format: "date-time",
-            description: "Timestamp when the product was created",
-            example: "2024-02-08T12:34:56.789Z",
-          },
+        ],
+        responses: {
+          201: { description: "Product created successfully" },
+          400: { description: "Bad request. Missing required fields." },
+          500: { description: "Internal server error." },
         },
       },
     },
@@ -56,7 +54,7 @@ const doc = {
 };
 
 const outputFile = "./docs/swagger.json";
-const endpointsFiles = ["./routes/productRoutes.js"]; // ✅ Ensure the file path is correct
+const endpointsFiles = ["./routes/productRoutes.js"];
 
 swaggerAutogen(outputFile, endpointsFiles, doc).then(() => {
   console.log("✅ Swagger documentation generated successfully!");
