@@ -3,6 +3,7 @@ const router = express.Router();
 const Product = require("../schemas/productSchema");
 
 
+
 // GET all products from MongoDB
 router.get("/", async (req, res) => {
     try {
@@ -27,16 +28,16 @@ router.get("/:id", async (req, res) => {
 // POST a new product to MongoDB
 router.post("/", async (req, res) => {
     try {
-        const { name, price, category } = req.body;
-        if (!name || !price || !category) {
+        const { name, price, category, description, availability } = req.body;
+        if (!name || !price || !category || !description || !availability) {
             return res.status(400).json({ message: "All fields are required" });
         }
 
-        const newProduct = new Product({ name, price, category });
+        const newProduct = new Product({ name, price, category, description, availability });
         const savedProduct = await newProduct.save();
         res.status(201).json(savedProduct);
     } catch (error) {
-        res.status(500).json({ message: "Server Error", error });
+        res.status(500).json({ message: "Server Error", error }); // ❌ Not logging error properly
     }
 });
 

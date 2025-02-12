@@ -1,14 +1,20 @@
 {
   "swagger": "2.0",
   "info": {
+    "title": "Shopify Product API",
     "version": "1.0.0",
-    "title": "REST API",
-    "description": ""
+    "description": "API documentation for Shopify Product Management"
   },
-  "host": "localhost:3000",
-  "basePath": "/",
+  "host": "localhost:5001",
+  "basePath": "/api",
   "schemes": [
     "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
   ],
   "paths": {
     "/": {
@@ -39,6 +45,12 @@
                   "example": "any"
                 },
                 "category": {
+                  "example": "any"
+                },
+                "description": {
+                  "example": "any"
+                },
+                "availability": {
                   "example": "any"
                 }
               }
@@ -122,6 +134,87 @@
           },
           "500": {
             "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Product": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "example": "object"
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "example": {
+                  "type": "string",
+                  "example": "Wireless Mouse"
+                }
+              }
+            },
+            "price": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "number"
+                },
+                "example": {
+                  "type": "number",
+                  "example": 29.99
+                }
+              }
+            },
+            "category": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "example": {
+                  "type": "string",
+                  "example": "Electronics"
+                }
+              }
+            },
+            "description": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "example": {
+                  "type": "string",
+                  "example": "A high-quality wireless mouse."
+                }
+              }
+            },
+            "availability": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "boolean"
+                },
+                "example": {
+                  "type": "boolean",
+                  "example": true
+                }
+              }
+            }
           }
         }
       }
