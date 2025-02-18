@@ -6,7 +6,7 @@
     "description": "API documentation for Shopify Product Management"
   },
   "host": "localhost:5001",
-  "basePath": "/api",
+  "basePath": "/api/products",
   "schemes": [
     "http"
   ],
