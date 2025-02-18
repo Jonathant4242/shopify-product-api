@@ -8,7 +8,7 @@ const doc = {
     description: "API documentation for Shopify Product Management",
   },
   host: "localhost:5001",
-  basePath: "/api",  // ✅ Ensures all requests go to `/api`
+  basePath: "/api/products",  // ✅ Now points directly to `/api/products`
   schemes: ["http"],
   consumes: ["application/json"],
   produces: ["application/json"],
@@ -27,7 +27,7 @@ const doc = {
   },
 
   paths: {
-    "/products": {  // ✅ Ensures `POST` goes to `/api/products`
+    "/": {  // ✅ Now, Swagger sends `POST` to `/api/products/`
       post: {
         summary: "Create a new product",
         description: "Adds a product to the database.",
@@ -59,3 +59,4 @@ const endpointsFiles = ["./routes/productRoutes.js"];
 swaggerAutogen(outputFile, endpointsFiles, doc).then(() => {
   console.log("✅ Swagger documentation generated successfully!");
 });
+// Compare this snippet from server.js:
